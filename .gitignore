@@ -1,6 +1,7 @@
 # Build output: anyone can rebuild it with build.bat
 *.exe
 *.pdb
+dist/
 
 # Windows clutter
 Thumbs.db
