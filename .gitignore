@@ -1,0 +1,7 @@
+# Build output: anyone can rebuild it with build.bat
+*.exe
+*.pdb
+
+# Windows clutter
+Thumbs.db
+desktop.ini
