@@ -2,13 +2,15 @@
 
 <h1 align="center">LastSecondsLeft</h1>
 
-<p align="center">A tiny Windows tray app that gives your laptop a dramatic countdown before it dies.</p>
+<p align="center">A tiny Windows tray app with two countdowns: one before your laptop battery dies, and one to rest your eyes.</p>
 
 ![The six countdown styles](docs/styles.png)
 
 ## Why
 
 The low-battery notification is easy to ignore, because you know there's "still some time". LastSecondsLeft makes that time visible. When the laptop is **not charging** and the battery hits **5%**, a big animated **30 → 0** countdown floats on top of everything. At 0 the PC **hibernates**, so your open work is saved. Plug in the charger and the countdown disappears.
+
+The same idea works for your eyes: after 20 minutes of screen time, a short, calm countdown reminds you to look away for 20 seconds. Both features live in one tray icon and can be set up (or turned off) in one settings panel. See [Eye breaks](#eye-breaks).
 
 ## Features
 
@@ -19,6 +21,7 @@ The low-battery notification is easy to ignore, because you know there's "still 
 - Plugging in the charger cancels it; there's no snooze button and Alt+F4 doesn't close it
 - Hibernates at 0, or does a normal shutdown if hibernation is disabled
 - Very light: while idle it only checks the battery every 10 s, and the animation runs only while a countdown is on screen
+- Optional **eye breaks** (20-20-20 rule): after 20 minutes of screen time, a calm reminder to look away
 - A single small `.exe` with no dependencies, built with the C# compiler that ships with Windows
 
 ## Install
@@ -36,7 +39,7 @@ If there's no `LastSecondsLeft.exe` yet, `install.bat` builds it from the source
 
 Find the logo in the tray (click `^` near the clock).
 
-- **Double-click** it, or right-click it → **Settings…**, to pick the style, start level, length and size. **Preview** shows the selected style.
+- **Double-click** it, or right-click it → **Settings…**, to pick the style, start level, length and size, and to set up eye breaks. **Preview** shows the selected style.
 - Right-click → **Test countdown (safe)** shows a countdown that never hibernates. A test countdown closes with a click.
 
 Settings are saved in `%LOCALAPPDATA%\LastSecondsLeft\settings.ini`.
@@ -51,6 +54,20 @@ Settings are saved in `%LOCALAPPDATA%\LastSecondsLeft\settings.ini`.
 | Spinner | 12 dots with a loading-style comet going round once per second; dots go dark as time runs out |
 | Dots | 10 dots that light up one by one every second, plus 60 tiny dots for the time left |
 | Classic | a simple red box |
+
+## Eye breaks
+
+<img src="docs/eyebreak.png" width="460" alt="Eye break reminder">
+
+Long stretches of looking at a screen can tire your eyes. A common recommendation is the **20-20-20 rule**: every 20 minutes, look at something about 20 feet (6 m) away for 20 seconds. Eye-care organizations widely recommend it; studies show it can ease eye-strain symptoms, although the evidence for the exact numbers is limited.
+
+- Only **screen time** counts: if you don't touch the mouse or keyboard for 5 minutes, or the PC sleeps, the timer starts over (your eyes were resting anyway).
+- The reminder is deliberately calm and simple, so there's nothing to stare at. It closes by itself, and a soft sound tells you when to look back.
+- **Skip** it when you're in a meeting or presenting. If Skip is too tempting, hide the button: then the only way to end a break early is to turn eye breaks off in Settings. The battery countdown always takes priority.
+- Settings: on/off, every 5–120 minutes, 10–300 seconds, window size (20–95 % of the screen width, default 40), Skip button on/off, sound on/off. The tray menu shows when the next break is due, and **Take an eye break now** starts one right away.
+- Limitation: watching a video without touching anything for 5+ minutes counts as "away".
+
+This is a habit helper, not medical advice. If your vision changes, see an eye doctor.
 
 ## Uninstall
 
@@ -71,8 +88,9 @@ For development, the exe also takes these arguments:
 | Argument | What it does |
 |---|---|
 | `/demo[:Style] [/seconds:N] [/size:N]` | shows one test countdown, then exits |
+| `/demo:Eye [/seconds:N] [/size:N]` | shows one eye break, then exits |
 | `/writeicon:<path>` | saves the logo as a multi-size `.ico` |
-| `/snapshots:<folder>` | renders `logo.png` and `styles.png` (the images in this README) without opening any window |
+| `/snapshots:<folder>` | renders `logo.png`, `styles.png` and `eyebreak.png` (the images in this README) without opening any window |
 
 ## Files
 
